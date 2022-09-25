@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "TJWChess"
+version = "0.0.1"
+readme = "README.md"
+dependencies = []
+
+# [tool.setuptools]
+# packages = ["hellosetup"]
+# [project.scripts]
+# hellosetup = "hellosetup.hello:say_hello"
