@@ -8,6 +8,9 @@ version = "0.0.1"
 readme = "README.md"
 dependencies = []
 
+[tool.setuptools.packages.find]
+# All the following settings are optional:
+where = ["src"]  # ["."] by default
 # [tool.setuptools]
 # packages = ["hellosetup"]
 # [project.scripts]
