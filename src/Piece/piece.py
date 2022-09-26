@@ -7,15 +7,8 @@ from abc import ABC, abstractmethod
 
 
 class Piece(ABC):
-
-    strColor = ""
-    intXCurrentPosition = 0
-    intYCurrentPosition = 0
-
     @abstractmethod
-    def setColor(self, strColor):
-        pass
-
-    @abstractmethod
-    def setCurrentPosition(self, intXCurrentPosition, intYCurrentPosition):
-        pass
+    def __init__(self, strColor, intCurXPos, intCurYPos):
+        self.strColor = strColor
+        self.intCurXPos = intCurXPos
+        self.intCurYPos = intCurYPos
