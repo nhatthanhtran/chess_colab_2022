@@ -4,31 +4,48 @@ Pawn Class
 """
 from piece import Piece
 import numpy as np
-from helper import blnInBound
+from helper import InBound
+
 
 class Pawn(Piece):
     def __init__(self, strColor, intCurXPos, intCurYPos, intMoveDir):
-        super().__init__(strColor, intCurXPos, intCurYPos)
+        super().__init__(strColor, intCurXPos, intCurYPos, False)
         self.blnMoved = False
         self.intMoveDir = intMoveDir
 
-    def arrPossibleMoves(self):
+    def PossibleMoves(self):
+        lstPosMoves = []
 
+        # Check if the pawn moved or not.
         if (self.blnMoved):
-            return(np.array([self.intCurXPos, self.intCurYPos+self.intMoveDir]))
-        else:
-            arrPosMoves = np.zeros((2, 2), dtype=np.intc)
-            arrPosMoves[0, :] = np.array(
-                [self.intCurXPos, self.intCurYPos+self.intMoveDir])
-            arrPosMoves[1, :] = np.array(
-                [self.intCurXPos, self.intCurYPos+self.intMoveDir*2])
+            if InBound(self.intCurXPos, self.intCurYPos+self.intMoveDir):
+                lstPosMoves.append(
+                    [self.intCurXPos, self.intCurYPos+self.intMoveDir])
+            else:
+                lstPosMoves.append([])
 
-            return(arrPosMoves)
+        else:
+            if InBound(self.intCurXPos, self.intCurYPos+self.intMoveDir):
+                lstMoves = []
+                lstMoves.append(
+                    [self.intCurXPos, self.intCurYPos+self.intMoveDir])
+
+                if InBound(self.intCurXPos, self.intCurYPos+self.intMoveDir*2):
+                    lstMoves.append(
+                        [self.intCurXPos, self.intCurYPos+self.intMoveDir*2])
+
+                lstPosMoves.append(lstMoves)
+            else:
+                lstPosMoves.append([])
+
+        return lstPosMoves
 
     def Move(self, intNewXPos, intNewYPos):
-        if blnInBound(intNewXPos, intNewYPos):
+        if InBound(intNewXPos, intNewYPos):
 
             self.intCurXPos = intNewXPos
             self.intCurYPos = intNewYPos
             self.blnMoved = True
 
+    def Capture(self):
+        self.Captured = True

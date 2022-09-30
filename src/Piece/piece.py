@@ -8,7 +8,8 @@ from abc import ABC, abstractmethod
 
 class Piece(ABC):
     @abstractmethod
-    def __init__(self, strColor, intCurXPos, intCurYPos):
+    def __init__(self, strColor, intCurXPos, intCurYPos, blnCaptured):
         self.strColor = strColor
         self.intCurXPos = intCurXPos
         self.intCurYPos = intCurYPos
+        self.blnCaptured = blnCaptured

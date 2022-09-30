@@ -1,13 +1,9 @@
 """
 This is the helper functions
 """
-mcintLOWERBOUND = 0
-mcintUPPERBOUND = 7
-
-def blnInBound(intXPos, intYPos):
-	return (intXPos >= mcintLOWERBOUND and intXPos <= mcintUPPERBOUND and intYPos >=  mcintLOWERBOUND and intYPos <= mcintUPPERBOUND)
+__mcintLOWERBOUND = 0
+__mcintUPPERBOUND = 7
 
 
-
-#print(blnInBound(-1,1))
-
+def InBound(intXPos, intYPos):
+    return (intXPos >= __mcintLOWERBOUND and intXPos <= __mcintUPPERBOUND and intYPos >= __mcintLOWERBOUND and intYPos <= __mcintUPPERBOUND)
