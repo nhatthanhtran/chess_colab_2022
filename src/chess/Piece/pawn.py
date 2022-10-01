@@ -61,8 +61,5 @@ class Pawn(Piece):
             self.bln_moved = True
 
     def capture(self):
-        self.captured = True
+        self.bln_captured = True
 
-
-test = Pawn("Black",4,4,1)
-print(test.possible_moves())
