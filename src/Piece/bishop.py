@@ -3,67 +3,68 @@
 Bishop Class
 """
 from piece import Piece
-from helper import InBound
+from helper import in_bound
 
 
 class Bishop(Piece):
-    def __init__(self, strColor, intCurXPos, intCurYPos):
-        super().__init__(strColor, intCurXPos, intCurYPos, False)
+    def __init__(self, str_color, int_cur_x_pos, int_cur_y_pos):
+        super().__init__(str_color, int_cur_x_pos, int_cur_y_pos, False)
 
-    def PossibleMoves(self):
-        lstPosMoves = []
+    def possible_moves(self):
+        lst_pos_moves = []
 
         # East North (++) direction moves
-        i = self.intCurXPos
-        j = self.intCurYPos
-        lstENMoves = []
+        i = self.int_cur_x_pos
+        j = self.int_cur_y_pos
+        lst_en_moves = []
 
-        while InBound(i+1, j+1):
-            lstENMoves.append([i+1, j+1])
+        while in_bound(i+1, j+1):
+            lst_en_moves.append([i+1, j+1])
             i += 1
             j += 1
-        lstPosMoves.append(lstENMoves)
+        lst_pos_moves.append(lst_en_moves)
 
         # West North (-+) direction moves
-        i = self.intCurXPos
-        j = self.intCurYPos
-        lstWNMoves = []
+        i = self.int_cur_x_pos
+        j = self.int_cur_y_pos
+        lst_wn_moves = []
 
-        while InBound(i-1, j+1):
-            lstWNMoves.append([i-1, j+1])
+        while in_bound(i-1, j+1):
+            lst_wn_moves.append([i-1, j+1])
             i -= 1
             j += 1
-        lstPosMoves.append(lstWNMoves)
+        lst_pos_moves.append(lst_wn_moves)
 
         # West South (--) direction moves
-        i = self.intCurXPos
-        j = self.intCurYPos
-        lstWSMoves = []
+        i = self.int_cur_x_pos
+        j = self.int_cur_y_pos
+        lst_ws_moves = []
 
-        while InBound(i-1, j-1):
-            lstWSMoves.append([i-1, j-1])
+        while in_bound(i-1, j-1):
+            lst_ws_moves.append([i-1, j-1])
             i -= 1
             j -= 1
-        lstPosMoves.append(lstWSMoves)
+        lst_pos_moves.append(lst_ws_moves)
 
         # East South (+-) direction moves
-        i = self.intCurXPos
-        j = self.intCurYPos
-        lstESMoves = []
+        i = self.int_cur_x_pos
+        j = self.int_cur_y_pos
+        lst_es_moves = []
 
-        while InBound(i+1, j-1):
-            lstESMoves.append([i+1, j-1])
+        while in_bound(i+1, j-1):
+            lst_es_moves.append([i+1, j-1])
             i += 1
             j -= 1
 
-        lstPosMoves.append(lstESMoves)
+        lst_pos_moves.append(lst_es_moves)
 
-        return lstPosMoves
+        return lst_pos_moves
 
-    def Capture(self):
-        self.blnCaptured = True
+    def capture(self):
+        self.bln_captured = True
 
-    def Move(self, intNewXPos, intNewYPos):
-        if InBound(intNewXPos, intNewYPos):
-            self.intCurXPos = intNewXPos
-            self.intCurYPos = intNewYPos
+    def move(self, int_new_x_pos, int_new_y_pos):
+        if in_bound(int_new_x_pos, int_new_y_pos):
+            self.int_cur_x_pos = int_new_x_pos
+            self.int_cur_y_pos = int_new_y_pos
+
