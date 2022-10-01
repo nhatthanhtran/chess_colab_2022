@@ -9,25 +9,23 @@ from bishop import Bishop
 
 
 class Queen(Piece):
-    def __init__(self, strColor, intCurXPos, intCurYPos):
-        super().__init__(strColor, intCurXPos, intCurYPos, False)
+    def __init__(self, str_color, int_cur_x_pos, int_cur_y_pos):
+        super().__init__(str_color, int_cur_x_pos, int_cur_y_pos, False)
 
-    def PossibleMoves(self):
+    def possible_moves(self):
 
         # Use the rook and bishop to get the moves
-        lstRookMoves = Rook(self.strColor, self.intCurXPos,
-                            self.intCurYPos).PossibleMoves()
-        lstBishopMoves = Bishop(
-            self.strColor, self.intCurXPos, self.intCurYPos).PossibleMoves()
+        lst_rook_moves = Rook(self.str_color, self.int_cur_x_pos,
+                            self.int_cur_y_pos).possible_moves()
+        lst_bishop_moves = Bishop(
+            self.str_color, self.int_cur_x_pos, self.int_cur_y_pos).possible_moves()
 
-        lstPosMoves = lstRookMoves + lstBishopMoves
+        return lst_rook_moves + lst_bishop_moves
 
-        return lstPosMoves
+    def capture(self):
+        self.bln_captured = True
 
-    def Capture(self):
-        self.Captured = True
-
-    def Move(self, intNewXPos, intNewYPos):
-        if InBound(intNewXPos, intNewYPos):
-            self.intCurXPos = intNewXPos
-            self.intCurYPos = intNewYPos
+    def move(self, int_new_x_pos, int_new_y_pos):
+        if in_bound(int_new_x_pos, int_new_y_pos):
+            self.int_cur_x_pos = int_new_x_pos
+            self.int_cur_y_pos = int_new_y_pos

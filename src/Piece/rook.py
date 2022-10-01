@@ -4,64 +4,64 @@ Rook Class
 """
 
 from piece import Piece
-from helper import InBound
+from helper import in_bound
 
 
 class Rook(Piece):
-    def __init__(self, strColor, intCurXPos, intCurYPos):
-        super().__init__(strColor, intCurXPos, intCurYPos, False)
-        self.blnMoved = False
+    def __init__(self, str_color, int_cur_x_pos, int_cur_y_pos):
+        super().__init__(str_color, int_cur_x_pos, int_cur_y_pos, False)
+        self.bln_moved = False
 
     def PossibleMoves(self):
-        lstPosMoves = []
+        lst_pos_moves = []
         # East (+=) direction move
-        i = self.intCurXPos
-        j = self.intCurYPos
-        lstEMoves = []
+        i = self.int_cur_x_pos
+        j = self.int_cur_y_pos
+        lst_e_moves = []
 
-        while InBound(i+1, j):
-            lstEMoves.append([i+1, j])
+        while in_bound(i+1, j):
+            lst_e_moves.append([i+1, j])
             i += 1
-        lstPosMoves.append(lstEMoves)
+        lst_pos_moves.append(lst_e_moves)
 
         # North (=+) direction move
-        i = self.intCurXPos
-        j = self.intCurYPos
-        lstNMoves = []
+        i = self.int_cur_x_pos
+        j = self.int_cur_y_pos
+        lst_n_moves = []
 
-        while InBound(i, j+1):
-            lstNMoves.append([i, j+1])
+        while in_bound(i, j+1):
+            lst_n_moves.append([i, j+1])
             j += 1
-        lstPosMoves.append(lstNMoves)
+        lst_pos_moves.append(lst_n_moves)
 
         # West (-=) direction move
-        i = self.intCurXPos
-        j = self.intCurYPos
-        lstWMoves = []
+        i = self.int_cur_x_pos
+        j = self.int_cur_y_pos
+        lst_w_moves = []
 
-        while InBound(i-1, j):
-            lstWMoves.append([i-1, j])
+        while in_bound(i-1, j):
+            lst_w_moves.append([i-1, j])
             i -= 1
-        lstPosMoves.append(lstWMoves)
+        lst_pos_moves.append(lst_w_moves)
 
         # South (=-) direction move
-        i = self.intCurXPos
-        j = self.intCurYPos
-        lstEMoves = []
+        i = self.int_cur_x_pos
+        j = self.int_cur_y_pos
+        lst_s_moves = []
 
-        while InBound(i, j-1):
-            lstEMoves.append([i, j-1])
+        while in_bound(i, j-1):
+            lst_s_moves.append([i, j-1])
             j -= 1
-        lstPosMoves.append(lstEMoves)
+        lst_pos_moves.append(lst_s_moves)
 
-        return lstPosMoves
+        return lst_pos_moves
 
-    def Capture(self):
-        self.blnCapture = True
+    def capture(self):
+        self.bln_captured = True
 
-    def Move(self, intNewXPos, intNewYPos):
-        if InBound(intNewXPos, intNewYPos):
+    def move(self, int_new_x_pos, int_new_y_pos):
+        if in_bound(int_new_x_pos, int_new_y_pos):
 
-            self.intCurXPos = intNewXPos
-            self.intCurYPos = intNewYPos
-            self.blnMoved = True
+            self.int_cur_x_pos = int_new_x_pos
+            self.int_cur_y_pos = int_new_y_pos
+            self.bln_moved = True

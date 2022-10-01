@@ -4,58 +4,60 @@ King Class
 """
 
 from piece import Piece
-from helper import InBound
+from helper import in_bound
 
 
 class King(Piece):
-    def __init__(self, strColor, intCurXPos, intCurYPos):
-        super().__init__(strColor, intCurXPos, intCurYPos, False)
-        self.blnMoved = False
+    def __init__(self, str_color, int_cur_x_pos, int_cur_y_pos):
+        super().__init__(str_color, int_cur_x_pos, int_cur_y_pos, False)
+        self.bln_moved = False
 
-    def PossibleMoves(self):
-        lstPosMoves = []
+    def possible_moves(self):
+        lst_pos_moves = []
 
         # Adding for each direction
         # East (+=)
-        lstPosMoves = self.AddMove(
-            lstPosMoves, self.intCurXPos+1, self.intCurYPos)
+        lst_pos_moves = self.add_move(
+            lst_pos_moves, self.int_cur_x_pos+1, self.int_cur_y_pos)
         # East North (++)
-        lstPosMoves = self.AddMove(
-            lstPosMoves, self.intCurXPos+1, self.intCurYPos+1)
+        lst_pos_moves = self.add_move(
+            lst_pos_moves, self.int_cur_x_pos+1, self.int_cur_y_pos+1)
         # North (=+)
-        lstPosMoves = self.AddMove(
-            lstPosMoves, self.intCurXPos, self.intCurYPos+1)
+        lst_pos_moves = self.add_move(
+            lst_pos_moves, self.int_cur_x_pos, self.int_cur_y_pos+1)
         # West North (-+)
-        lstPosMoves = self.AddMove(
-            lstPosMoves, self.intCurXPos-1, self.intCurYPos+1)
+        lst_pos_moves = self.add_move(
+            lst_pos_moves, self.int_cur_x_pos-1, self.int_cur_y_pos+1)
         # West (-=)
-        lstPosMoves = self.AddMove(
-            lstPosMoves, self.intCurXPos-1, self.intCurYPos)
+        lst_pos_moves = self.add_move(
+            lst_pos_moves, self.int_cur_x_pos-1, self.int_cur_y_pos)
         # West South (--)
-        lstPosMoves = self.AddMove(
-            lstPosMoves, self.intCurXPos-1, self.intCurYPos-1)
+        lst_pos_moves = self.add_move(
+            lst_pos_moves, self.int_cur_x_pos-1, self.int_cur_y_pos-1)
         # South (=-)
-        lstPosMoves = self.AddMove(
-            lstPosMoves, self.intCurXPos, self.intCurYPos-1)
+        lst_pos_moves = self.add_move(
+            lst_pos_moves, self.int_cur_x_pos, self.int_cur_y_pos-1)
         # East South (+-)
-        lstPosMoves = self.AddMove(
-            lstPosMoves, self.intCurXPos+1, self.intCurYPos-1)
+        lst_pos_moves = self.add_move(
+            lst_pos_moves, self.int_cur_x_pos+1, self.int_cur_y_pos-1)
 
-        return lstPosMoves
+        return lst_pos_moves
 
-    def AddMove(self, lstPosMove, intXPos, intYPos):
-        if InBound(intXPos, intYPos):
-            lstMove = []
-            lstMove.append([intXPos, intYPos])
-            lstPosMove.append(lstMove)
+    def add_move(self, lst_pos_move, int_x_pos, int_y_pos):
+        if in_bound(int_x_pos, int_y_pos):
+            lst_move = []
+            lst_move.append([int_x_pos, int_y_pos])
+            lst_pos_move.append(lst_move)
 
-        return lstPosMove
+        return lst_pos_move
 
-    def Capture(self):
-        self.blnCaptured = True
+    def capture(self):
+        self.bln_captured = True
 
-    def Move(self, intNewXPos, intNewYPos):
-        if InBound(intNewXPos, intNewYPos):
-            self.intCurXPos = intNewXPos
-            self.intCurYPos = intNewYPos
-            self.blnMoved = True
+    def move(self, int_new_x_pos, int_new_y_pos):
+        if in_bound(int_new_x_pos, int_new_y_pos):
+            self.int_cur_x_pos = int_new_x_pos
+            self.int_cur_y_pos = int_new_y_pos
+            self.bln_moved = True
+
+
