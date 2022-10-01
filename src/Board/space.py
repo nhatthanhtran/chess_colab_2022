@@ -1,11 +1,11 @@
-""Space class
-""
+"""Space class
+"""
 
 class Space:
     def __init__(self, color):
         self.str_color = color
-        self.bln_occupied = false
+        self.bln_occupied = False
 
     def occupy(piece):
-        if self.bln_occupied
+        if self.bln_occupied:
             self.pc_piece.capture()
