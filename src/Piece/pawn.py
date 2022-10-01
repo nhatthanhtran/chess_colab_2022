@@ -4,48 +4,65 @@ Pawn Class
 """
 from piece import Piece
 import numpy as np
-from helper import InBound
+from helper import in_bound
 
 
 class Pawn(Piece):
-    def __init__(self, strColor, intCurXPos, intCurYPos, intMoveDir):
-        super().__init__(strColor, intCurXPos, intCurYPos, False)
-        self.blnMoved = False
-        self.intMoveDir = intMoveDir
+    def __init__(self, str_color, int_cur_x_pos, int_cur_y_pos, int_move_dir):
+        super().__init__(str_color, int_cur_x_pos, int_cur_y_pos, False)
+        self.bln_moved = False
+        self.int_move_dir = int_move_dir
 
-    def PossibleMoves(self):
-        lstPosMoves = []
+    def possible_moves(self):
+        lst_pos_moves = []
 
         # Check if the pawn moved or not.
-        if (self.blnMoved):
-            if InBound(self.intCurXPos, self.intCurYPos+self.intMoveDir):
-                lstPosMoves.append(
-                    [self.intCurXPos, self.intCurYPos+self.intMoveDir])
+        if (self.bln_moved):
+            if in_bound(self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir):
+                lst_pos_moves.append(
+                    [self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir])
             else:
-                lstPosMoves.append([])
+                lst_pos_moves.append([])
 
         else:
-            if InBound(self.intCurXPos, self.intCurYPos+self.intMoveDir):
-                lstMoves = []
-                lstMoves.append(
-                    [self.intCurXPos, self.intCurYPos+self.intMoveDir])
+            if in_bound(self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir):
+                lst_moves = []
+                lst_moves.append(
+                    [self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir])
 
-                if InBound(self.intCurXPos, self.intCurYPos+self.intMoveDir*2):
-                    lstMoves.append(
-                        [self.intCurXPos, self.intCurYPos+self.intMoveDir*2])
+                if in_bound(self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir*2):
+                    lst_moves.append(
+                        [self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir*2])
 
-                lstPosMoves.append(lstMoves)
+                lst_pos_moves.append(lst_moves)
             else:
-                lstPosMoves.append([])
+                lst_pos_moves.append([])
+        
+        #get the attack moves
+        lst_moves = []
+        #-+
+        if in_bound(self.int_cur_x_pos-1, self.int_cur_y_pos+self.int_move_dir):
+            lst_moves.append(
+                    [self.int_cur_x_pos-1, self.int_cur_y_pos+self.int_move_dir])
+        if in_bound(self.int_cur_x_pos+1, self.int_cur_y_pos+self.int_move_dir):
+            lst_moves.append(
+                    [self.int_cur_x_pos+1, self.int_cur_y_pos+self.int_move_dir])
 
-        return lstPosMoves
+        if lst_moves:
+            lst_pos_moves.append(lst_moves)
 
-    def Move(self, intNewXPos, intNewYPos):
-        if InBound(intNewXPos, intNewYPos):
+        return lst_pos_moves
 
-            self.intCurXPos = intNewXPos
-            self.intCurYPos = intNewYPos
-            self.blnMoved = True
+    def move(self, int_new_x_pos, int_new_y_pos):
+        if in_bound(int_new_x_pos, int_new_y_pos):
 
-    def Capture(self):
-        self.Captured = True
+            self.int_cur_x_pos = int_new_x_pos
+            self.int_cur_y_pos = int_new_y_pos
+            self.bln_moved = True
+
+    def capture(self):
+        self.captured = True
+
+
+test = Pawn("Black",4,4,1)
+print(test.possible_moves())
