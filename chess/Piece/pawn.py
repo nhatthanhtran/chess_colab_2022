@@ -2,9 +2,9 @@
 """
 Pawn Class
 """
-from piece import Piece
+from chess.Piece.piece import Piece
 import numpy as np
-from helper import in_bound
+from chess.Piece.helper import in_bound
 
 
 class Pawn(Piece):

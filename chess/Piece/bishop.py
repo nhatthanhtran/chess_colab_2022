@@ -2,8 +2,8 @@
 """
 Bishop Class
 """
-from piece import Piece
-from helper import in_bound
+from chess.Piece.piece import Piece
+from chess.Piece.helper import in_bound
 
 
 class Bishop(Piece):

@@ -1,7 +1,7 @@
 """Testing board object in this file. Author: John Palacios
 """
 
-from board import Board
+from chess.Board.board import Board
 
 """Testing Space colors
 """
