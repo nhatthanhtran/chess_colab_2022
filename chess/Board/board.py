@@ -3,6 +3,8 @@
 
 from chess.Board.space import Space
 
+from chess.Piece.pawn import Pawn
+
 _INT_BOARDSIZE = 8 # Gloablal constant board side length in spaces
 
 """Assuming upper left corner is board[0][0] and white

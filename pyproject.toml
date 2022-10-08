@@ -20,4 +20,4 @@ include = ["chess",
 #version = {attr = "chess.VERSION"}
 
 [project.scripts]
-test-board = "chess.Board:boardTest"
+test-board = "chess.Board.boardTest:test"
