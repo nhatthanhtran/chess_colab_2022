@@ -9,6 +9,9 @@ from chess.Piece.pawn import Pawn
 # test = Board()
 # print(test.get_spaceColor(0, 0))
 
-test2 = Pawn("black", 1, 1, 1)
 
-print(test2.possible_moves())
+def test():
+
+    test2 = Pawn("black", 1, 1, 1)
+
+    print(test2.possible_moves())
