@@ -1,7 +1,7 @@
 """Board class
 """
 
-from space import Space
+from chess.Board.space import Space
 
 _INT_BOARDSIZE = 8 # Gloablal constant board side length in spaces
 

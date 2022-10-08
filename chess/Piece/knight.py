@@ -3,8 +3,8 @@
 Knight Class
 """
 
-from piece import Piece
-from helper import *
+from chess.Piece.piece import Piece
+from chess.Piece.helper import *
 
 
 class Knight(Piece):

@@ -2,10 +2,10 @@
 """
 Queen Class
 """
-from piece import Piece
-from helper import InBound
-from rook import Rook
-from bishop import Bishop
+from chess.Piece.piece import Piece
+from chess.Piece.helper import InBound
+from chess.Piece.rook import Rook
+from chess.Piece.bishop import Bishop
 
 
 class Queen(Piece):
