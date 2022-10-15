@@ -10,8 +10,8 @@ from chess.Piece.pawn import Pawn
 # print(test.get_spaceColor(0, 0))
 
 
-def test():
+def test_pawn():
 
     test2 = Pawn("black", 1, 1, 1)
 
-    print(test2.possible_moves())
+    assert test2.possible_moves() == [[[1, 2], [1, 3]], [[0, 2], [2, 2]]]

@@ -8,7 +8,8 @@ build-backend = "setuptools.build_meta"
 name = "chess"
 readme = "README.md"
 dynamic = ["version"]
-dependencies = ["numpy"]
+dependencies = ["numpy",
+	        "pytest"]
 
 [tool.setuptools.packages.find]
 # All the following settings are optional:
