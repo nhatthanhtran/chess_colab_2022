@@ -336,4 +336,6 @@ tags
 # Persistent undo
 [._]*.un~
 
+*.~undo-tree~
+
 # End of https://www.toptal.com/developers/gitignore/api/linux,visualstudiocode,python,emacs,windows,macos,vim
