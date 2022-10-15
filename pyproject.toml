@@ -5,10 +5,10 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 
 [project]
-name = "chess_collab_2022"
+name = "chess"
 readme = "README.md"
 dynamic = ["version"]
-#dependencies = []
+dependencies = ["numpy"]
 
 [tool.setuptools.packages.find]
 # All the following settings are optional:
