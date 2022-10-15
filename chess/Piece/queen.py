@@ -15,10 +15,12 @@ class Queen(Piece):
     def possible_moves(self):
 
         # Use the rook and bishop to get the moves
-        lst_rook_moves = Rook(self.str_color, self.int_cur_x_pos,
-                            self.int_cur_y_pos).possible_moves()
+        lst_rook_moves = Rook(
+            self.str_color, self.int_cur_x_pos, self.int_cur_y_pos
+        ).possible_moves()
         lst_bishop_moves = Bishop(
-            self.str_color, self.int_cur_x_pos, self.int_cur_y_pos).possible_moves()
+            self.str_color, self.int_cur_x_pos, self.int_cur_y_pos
+        ).possible_moves()
 
         return lst_rook_moves + lst_bishop_moves
 

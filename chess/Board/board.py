@@ -5,13 +5,17 @@ from chess.Board.space import Space
 
 from chess.Piece.pawn import Pawn
 
-_INT_BOARDSIZE = 8 # Gloablal constant board side length in spaces
+_INT_BOARDSIZE = 8  # Gloablal constant board side length in spaces
 
 """Assuming upper left corner is board[0][0] and white
 """
 
+
 class Board:
-    _board = [[None for _ in range(INT_BOARDSIZE)] for _ in range(INT_BOARDSIZE)] # Will hold spaces
+    _board = [
+        [None for _ in range(INT_BOARDSIZE)] for _ in range(INT_BOARDSIZE)
+    ]  # Will hold spaces
+
     def __init__(self):
         for i in range(INT_BOARDSIZE):
             for j in range(INT_BOARDSIZE):
@@ -26,8 +30,8 @@ class Board:
     # returns true of piece at (s_x, s_y) can be moved to (d_x, d_y)
     @classmethod
     def validate_move(s_x, s_y, d_x, d_y):
-        _piece = self_board[s_x][s_y].get_piece() # Do not use, under construction
+        _piece = self_board[s_x][s_y].get_piece()  # Do not use, under construction
         _piece_type = type(_piece)
-        
+
         # Testing type function
         return _piece_type

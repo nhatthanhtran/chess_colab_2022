@@ -19,8 +19,8 @@ class Rook(Piece):
         j = self.int_cur_y_pos
         lst_e_moves = []
 
-        while in_bound(i+1, j):
-            lst_e_moves.append([i+1, j])
+        while in_bound(i + 1, j):
+            lst_e_moves.append([i + 1, j])
             i += 1
         lst_pos_moves.append(lst_e_moves)
 
@@ -29,8 +29,8 @@ class Rook(Piece):
         j = self.int_cur_y_pos
         lst_n_moves = []
 
-        while in_bound(i, j+1):
-            lst_n_moves.append([i, j+1])
+        while in_bound(i, j + 1):
+            lst_n_moves.append([i, j + 1])
             j += 1
         lst_pos_moves.append(lst_n_moves)
 
@@ -39,8 +39,8 @@ class Rook(Piece):
         j = self.int_cur_y_pos
         lst_w_moves = []
 
-        while in_bound(i-1, j):
-            lst_w_moves.append([i-1, j])
+        while in_bound(i - 1, j):
+            lst_w_moves.append([i - 1, j])
             i -= 1
         lst_pos_moves.append(lst_w_moves)
 
@@ -49,8 +49,8 @@ class Rook(Piece):
         j = self.int_cur_y_pos
         lst_s_moves = []
 
-        while in_bound(i, j-1):
-            lst_s_moves.append([i, j-1])
+        while in_bound(i, j - 1):
+            lst_s_moves.append([i, j - 1])
             j -= 1
         lst_pos_moves.append(lst_s_moves)
 

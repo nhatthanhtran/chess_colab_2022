@@ -9,6 +9,7 @@
 # print(Path.cwd())
 from chess.Piece.pawn import Pawn
 
+
 class Space:
     def __init__(self, color):
         self.str_color = color
@@ -20,7 +21,7 @@ class Space:
             self.pc_piece.capture()
             self.pc_piece = piece
         else:
-             self.pc_piece = piece
+            self.pc_piece = piece
 
     @classmethod
     def get_piece(self):

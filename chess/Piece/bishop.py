@@ -18,8 +18,8 @@ class Bishop(Piece):
         j = self.int_cur_y_pos
         lst_en_moves = []
 
-        while in_bound(i+1, j+1):
-            lst_en_moves.append([i+1, j+1])
+        while in_bound(i + 1, j + 1):
+            lst_en_moves.append([i + 1, j + 1])
             i += 1
             j += 1
         lst_pos_moves.append(lst_en_moves)
@@ -29,8 +29,8 @@ class Bishop(Piece):
         j = self.int_cur_y_pos
         lst_wn_moves = []
 
-        while in_bound(i-1, j+1):
-            lst_wn_moves.append([i-1, j+1])
+        while in_bound(i - 1, j + 1):
+            lst_wn_moves.append([i - 1, j + 1])
             i -= 1
             j += 1
         lst_pos_moves.append(lst_wn_moves)
@@ -40,8 +40,8 @@ class Bishop(Piece):
         j = self.int_cur_y_pos
         lst_ws_moves = []
 
-        while in_bound(i-1, j-1):
-            lst_ws_moves.append([i-1, j-1])
+        while in_bound(i - 1, j - 1):
+            lst_ws_moves.append([i - 1, j - 1])
             i -= 1
             j -= 1
         lst_pos_moves.append(lst_ws_moves)
@@ -51,8 +51,8 @@ class Bishop(Piece):
         j = self.int_cur_y_pos
         lst_es_moves = []
 
-        while in_bound(i+1, j-1):
-            lst_es_moves.append([i+1, j-1])
+        while in_bound(i + 1, j - 1):
+            lst_es_moves.append([i + 1, j - 1])
             i += 1
             j -= 1
 
@@ -67,4 +67,3 @@ class Bishop(Piece):
         if in_bound(int_new_x_pos, int_new_y_pos):
             self.int_cur_x_pos = int_new_x_pos
             self.int_cur_y_pos = int_new_y_pos
-

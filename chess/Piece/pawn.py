@@ -17,36 +17,43 @@ class Pawn(Piece):
         lst_pos_moves = []
 
         # Check if the pawn moved or not.
-        if (self.bln_moved):
-            if in_bound(self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir):
+        if self.bln_moved:
+            if in_bound(self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir):
                 lst_pos_moves.append(
-                    [self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir])
+                    [self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir]
+                )
             else:
                 lst_pos_moves.append([])
 
         else:
-            if in_bound(self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir):
+            if in_bound(self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir):
                 lst_moves = []
                 lst_moves.append(
-                    [self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir])
+                    [self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir]
+                )
 
-                if in_bound(self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir*2):
+                if in_bound(
+                    self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir * 2
+                ):
                     lst_moves.append(
-                        [self.int_cur_x_pos, self.int_cur_y_pos+self.int_move_dir*2])
+                        [self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir * 2]
+                    )
 
                 lst_pos_moves.append(lst_moves)
             else:
                 lst_pos_moves.append([])
-        
-        #get the attack moves
+
+        # get the attack moves
         lst_moves = []
-        #-+
-        if in_bound(self.int_cur_x_pos-1, self.int_cur_y_pos+self.int_move_dir):
+        # -+
+        if in_bound(self.int_cur_x_pos - 1, self.int_cur_y_pos + self.int_move_dir):
             lst_moves.append(
-                    [self.int_cur_x_pos-1, self.int_cur_y_pos+self.int_move_dir])
-        if in_bound(self.int_cur_x_pos+1, self.int_cur_y_pos+self.int_move_dir):
+                [self.int_cur_x_pos - 1, self.int_cur_y_pos + self.int_move_dir]
+            )
+        if in_bound(self.int_cur_x_pos + 1, self.int_cur_y_pos + self.int_move_dir):
             lst_moves.append(
-                    [self.int_cur_x_pos+1, self.int_cur_y_pos+self.int_move_dir])
+                [self.int_cur_x_pos + 1, self.int_cur_y_pos + self.int_move_dir]
+            )
 
         if lst_moves:
             lst_pos_moves.append(lst_moves)
@@ -62,4 +69,3 @@ class Pawn(Piece):
 
     def capture(self):
         self.bln_captured = True
-

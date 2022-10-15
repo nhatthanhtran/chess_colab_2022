@@ -18,28 +18,36 @@ class King(Piece):
         # Adding for each direction
         # East (+=)
         lst_pos_moves = self.add_move(
-            lst_pos_moves, self.int_cur_x_pos+1, self.int_cur_y_pos)
+            lst_pos_moves, self.int_cur_x_pos + 1, self.int_cur_y_pos
+        )
         # East North (++)
         lst_pos_moves = self.add_move(
-            lst_pos_moves, self.int_cur_x_pos+1, self.int_cur_y_pos+1)
+            lst_pos_moves, self.int_cur_x_pos + 1, self.int_cur_y_pos + 1
+        )
         # North (=+)
         lst_pos_moves = self.add_move(
-            lst_pos_moves, self.int_cur_x_pos, self.int_cur_y_pos+1)
+            lst_pos_moves, self.int_cur_x_pos, self.int_cur_y_pos + 1
+        )
         # West North (-+)
         lst_pos_moves = self.add_move(
-            lst_pos_moves, self.int_cur_x_pos-1, self.int_cur_y_pos+1)
+            lst_pos_moves, self.int_cur_x_pos - 1, self.int_cur_y_pos + 1
+        )
         # West (-=)
         lst_pos_moves = self.add_move(
-            lst_pos_moves, self.int_cur_x_pos-1, self.int_cur_y_pos)
+            lst_pos_moves, self.int_cur_x_pos - 1, self.int_cur_y_pos
+        )
         # West South (--)
         lst_pos_moves = self.add_move(
-            lst_pos_moves, self.int_cur_x_pos-1, self.int_cur_y_pos-1)
+            lst_pos_moves, self.int_cur_x_pos - 1, self.int_cur_y_pos - 1
+        )
         # South (=-)
         lst_pos_moves = self.add_move(
-            lst_pos_moves, self.int_cur_x_pos, self.int_cur_y_pos-1)
+            lst_pos_moves, self.int_cur_x_pos, self.int_cur_y_pos - 1
+        )
         # East South (+-)
         lst_pos_moves = self.add_move(
-            lst_pos_moves, self.int_cur_x_pos+1, self.int_cur_y_pos-1)
+            lst_pos_moves, self.int_cur_x_pos + 1, self.int_cur_y_pos - 1
+        )
 
         return lst_pos_moves
 
@@ -59,5 +67,3 @@ class King(Piece):
             self.int_cur_x_pos = int_new_x_pos
             self.int_cur_y_pos = int_new_y_pos
             self.bln_moved = True
-
-

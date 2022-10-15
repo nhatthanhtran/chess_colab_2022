@@ -16,50 +16,50 @@ class Knight(Piece):
 
         # 2East1North (+2+1)
         lst_moves = []
-        if in_bound(self.int_cur_x_pos+2, self.int_cur_y_pos+1):
-            lst_moves.append([self.int_cur_x_pos+2, self.int_cur_y_pos+1])
+        if in_bound(self.int_cur_x_pos + 2, self.int_cur_y_pos + 1):
+            lst_moves.append([self.int_cur_x_pos + 2, self.int_cur_y_pos + 1])
             lst_pos_moves.append(lst_moves)
 
         # 2East1South (+2-1)
         lst_moves = []
-        if in_bound(self.int_cur_x_pos+2, self.int_cur_y_pos-1):
-            lst_moves.append([self.int_cur_x_pos+2, self.int_cur_y_pos-1])
+        if in_bound(self.int_cur_x_pos + 2, self.int_cur_y_pos - 1):
+            lst_moves.append([self.int_cur_x_pos + 2, self.int_cur_y_pos - 1])
             lst_pos_moves.append(lst_moves)
 
         # 1East2North (+1+2)
         lst_moves = []
-        if in_bound(self.int_cur_x_pos+1, self.int_cur_y_pos+2):
-            lst_moves.append([self.int_cur_x_pos+1, self.int_cur_y_pos+2])
+        if in_bound(self.int_cur_x_pos + 1, self.int_cur_y_pos + 2):
+            lst_moves.append([self.int_cur_x_pos + 1, self.int_cur_y_pos + 2])
             lst_pos_moves.append(lst_moves)
 
         # 1West2North (-1+2)
         lst_moves = []
-        if in_bound(self.int_cur_x_pos-1, self.int_cur_y_pos+2):
-            lst_moves.append([self.int_cur_x_pos-1, self.int_cur_y_pos+2])
+        if in_bound(self.int_cur_x_pos - 1, self.int_cur_y_pos + 2):
+            lst_moves.append([self.int_cur_x_pos - 1, self.int_cur_y_pos + 2])
             lst_pos_moves.append(lst_moves)
 
         # 2West1North (-2+1)
         lst_moves = []
-        if in_bound(self.int_cur_x_pos-2, self.int_cur_y_pos+1):
-            lst_moves.append([self.int_cur_x_pos-2, self.int_cur_y_pos+1])
+        if in_bound(self.int_cur_x_pos - 2, self.int_cur_y_pos + 1):
+            lst_moves.append([self.int_cur_x_pos - 2, self.int_cur_y_pos + 1])
             lst_pos_moves.append(lst_moves)
 
         # 2West1South (-2-1)
         lst_moves = []
-        if in_bound(self.int_cur_x_pos-2, self.int_cur_y_pos-1):
-            lst_moves.append([self.int_cur_x_pos-2, self.int_cur_y_pos-1])
+        if in_bound(self.int_cur_x_pos - 2, self.int_cur_y_pos - 1):
+            lst_moves.append([self.int_cur_x_pos - 2, self.int_cur_y_pos - 1])
             lst_pos_moves.append(lst_moves)
 
         # 1West2South (-1-2)
         lst_moves = []
-        if in_bound(self.int_cur_x_pos-1, self.int_cur_y_pos-2):
-            lst_moves.append([self.int_cur_x_pos-1, self.int_cur_y_pos-2])
+        if in_bound(self.int_cur_x_pos - 1, self.int_cur_y_pos - 2):
+            lst_moves.append([self.int_cur_x_pos - 1, self.int_cur_y_pos - 2])
             lst_pos_moves.append(lst_moves)
 
         # 1East2South (+1-2)
         lst_moves = []
-        if in_bound(self.int_cur_x_pos+1, self.int_cur_y_pos-2):
-            lst_moves.append([self.int_cur_x_pos+1, self.int_cur_y_pos-2])
+        if in_bound(self.int_cur_x_pos + 1, self.int_cur_y_pos - 2):
+            lst_moves.append([self.int_cur_x_pos + 1, self.int_cur_y_pos - 2])
             lst_pos_moves.append(lst_moves)
 
         return lst_pos_moves
