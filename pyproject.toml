@@ -12,7 +12,7 @@ dependencies = ["numpy"]
 
 [tool.setuptools.packages.find]
 # All the following settings are optional:
-where = ["chess"]  # ["."] by default
+#where = ["chess"]  # ["."] by default
 include = ["chess",
 	   "chess*"]
 
