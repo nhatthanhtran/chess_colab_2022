@@ -39,7 +39,7 @@ $ source .venv/bin/activate
 .venv\Scripts\activate
 ```	
 	
-Do this before you start working on the project to make sure only the correct packages are installed.
+Do this before you start working on or installing the project to make sure only the correct packages are installed.
 
 ## To do a temporary editable development install
 
