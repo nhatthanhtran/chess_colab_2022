@@ -13,7 +13,8 @@ readme = "README.md"
 dynamic = ["version"]
 dependencies = [
 	     "numpy",
-	     "pyside6",
+	     "pyqt6",
+	     "pyqt6-tools",
 	     "pytest",
 ]
 
