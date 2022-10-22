@@ -2,7 +2,6 @@
 Player Class
 """
 
-
 class Player:
     def __init__(self, str_name, str_player_color) -> None:
         self.str_name = str_name
