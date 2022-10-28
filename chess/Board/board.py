@@ -1,6 +1,7 @@
 """Board class
 """
 
+from ctypes import sizeof
 from nis import match
 from operator import truediv
 from unittest import case
@@ -24,7 +25,8 @@ class Board:
         self._board = [
             [None for _ in range(_INT_BOARDSIZE)] for _ in range(_INT_BOARDSIZE)
         ]
-        self.lst_of_pieces = []
+        self._lst_of_pieces = []
+        # Set space color to checkered pattern
         for i in range(_INT_BOARDSIZE):
             for j in range(_INT_BOARDSIZE):
                 str_color_ = "white" if (i + j) % 2 == 0 else "black"
@@ -38,44 +40,67 @@ class Board:
     @classmethod
     def _create_pieces(self):
         _piece_color = "white"
-        krook = Rook(_piece_color, 0, 0)
-        self._lst_of_pieces.append(krook)
-        kknight = Knight(_piece_color, 1, 0)
-        self._lst_of_pieces.append(kknight)
-        kbishop = Bishop(_piece_color, 2, 0)
-        self._lst_of_pieces.append(kbishop)
-        king = King(_piece_color, 3, 0)
-        self._lst_of_pieces.append(king)
-        queen = Queen(_piece_color, 4, 0)
-        self._lst_of_pieces.append(queen)
-        qbishop = Bishop(_piece_color, 5, 0)
-        self._lst_of_pieces.append(qbishop)
-        qknight = Knight(_piece_color, 6, 0)
-        self._lst_of_pieces.append(qknight)
-        qrook = Rook(_piece_color, 7, 0)
-        self._lst_of_pieces.append(qrook)
+        # krook = Rook(_piece_color, 0, 0)
+        # self._lst_of_pieces.append(krook)
+        # kknight = Knight(_piece_color, 1, 0)
+        # self._lst_of_pieces.append(kknight)
+        # kbishop = Bishop(_piece_color, 2, 0)
+        # self._lst_of_pieces.append(kbishop)
+        # king = King(_piece_color, 3, 0)
+        # self._lst_of_pieces.append(king)
+        # queen = Queen(_piece_color, 4, 0)
+        # self._lst_of_pieces.append(queen)
+        # qbishop = Bishop(_piece_color, 5, 0)
+        # self._lst_of_pieces.append(qbishop)
+        # qknight = Knight(_piece_color, 6, 0)
+        # self._lst_of_pieces.append(qknight)
+        # qrook = Rook(_piece_color, 7, 0)
+        # self._lst_of_pieces.append(qrook)
+
+        _lst_backline = [
+            Rook,
+            Knight,
+            Bishop,
+            King,
+            Queen,
+            Bishop,
+            Knight,
+            Rook,
+        ]  # Hardcode backline order for now
+
+        # Set up back white row
+        for i in range(len(_lst_backline)):
+            self._lst_of_pieces.append(_lst_backline[i](_piece_color, i, 0))
+
+        # Set up white pawns
         for i in range(_INT_BOARDSIZE):
-            self._lst_of_pieces.append(Pawn(_piece_color, i, 0))
+            self._lst_of_pieces.append(Pawn(_piece_color, i, 1, 1))
 
         _piece_color = "black"
-        krook = Rook(_piece_color, 0, 7)
-        self._lst_of_pieces.append(krook)
-        kknight = Knight(_piece_color, 1, 7)
-        self._lst_of_pieces.append(kknight)
-        kbishop = Bishop(_piece_color, 2, 7)
-        self._lst_of_pieces.append(kbishop)
-        king = King(_piece_color, 3, 7)
-        self._lst_of_pieces.append(king)
-        queen = Queen(_piece_color, 4, 7)
-        self._lst_of_pieces.append(queen)
-        qbishop = Bishop(_piece_color, 5, 7)
-        self._lst_of_pieces.append(qbishop)
-        qknight = Knight(_piece_color, 6, 7)
-        self._lst_of_pieces.append(qknight)
-        qrook = Rook(_piece_color, 7, 7)
-        self._lst_of_pieces.append(qrook)
+        # krook = Rook(_piece_color, 0, 7)
+        # self._lst_of_pieces.append(krook)
+        # kknight = Knight(_piece_color, 1, 7)
+        # self._lst_of_pieces.append(kknight)
+        # kbishop = Bishop(_piece_color, 2, 7)
+        # self._lst_of_pieces.append(kbishop)
+        # king = King(_piece_color, 3, 7)
+        # self._lst_of_pieces.append(king)
+        # queen = Queen(_piece_color, 4, 7)
+        # self._lst_of_pieces.append(queen)
+        # qbishop = Bishop(_piece_color, 5, 7)
+        # self._lst_of_pieces.append(qbishop)
+        # qknight = Knight(_piece_color, 6, 7)
+        # self._lst_of_pieces.append(qknight)
+        # qrook = Rook(_piece_color, 7, 7)
+        # self._lst_of_pieces.append(qrook)
+
+        # Set up black back row
+        for i in range(len(_lst_backline)):
+            self._lst_of_pieces.append(_lst_backline[i](_piece_color, i, 7))
+
+        # Set up pawns
         for i in range(_INT_BOARDSIZE):
-            self._lst_of_pieces.append(Pawn(_piece_color, i, 7))
+            self._lst_of_pieces.append(Pawn(_piece_color, i, 6, -1))
 
     # Set pieces where they belong (Only used durning initialization)
     @classmethod
