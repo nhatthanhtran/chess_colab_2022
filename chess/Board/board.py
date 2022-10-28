@@ -37,7 +37,6 @@ class Board:
         self._set_pieces()
 
     # creates list of pieces to put on board at creation
-    @classmethod
     def _create_pieces(self):
         _piece_color = "white"
         # krook = Rook(_piece_color, 0, 0)
@@ -103,20 +102,17 @@ class Board:
             self._lst_of_pieces.append(Pawn(_piece_color, i, 6, -1))
 
     # Set pieces where they belong (Only used durning initialization)
-    @classmethod
     def _set_pieces(self):
         for piece in self._lst_of_pieces:
             i = piece.int_cur_x_pos
-            j = piece.int_int_y_pos
+            j = piece.int_cur_y_pos
             self._board[i][j].occupy(piece)
 
     # returns space color string
-    @classmethod
     def get_spaceColor(self, i, j):
         return self._board[i][j].str_color
 
     # returns true of piece at (s_x, s_y) can be moved to (d_x, d_y)
-    @classmethod
     def validate_move(self, s_x, s_y, d_x, d_y):
         _piece = self._board[s_x][s_y].get_piece()
         if _piece:
