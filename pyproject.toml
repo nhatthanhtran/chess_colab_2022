@@ -13,10 +13,8 @@ readme = "README.md"
 dynamic = ["version"]
 # requires-python = ">=3.10"
 dependencies = [
-	     "numpy",
-	     "pyqt6",
-	     "pyqt6-tools",
 	     "pytest",
+		 "pygame"
 ]
 
 [tool.setuptools.packages.find]

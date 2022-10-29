@@ -2,18 +2,22 @@
 Game Class
 """
 
-from chess.Board.board import Board
+# from chess.Board.board import Board
 from chess.Player.player import Player
+import pygame as p
 
 class Game():
-    def __init__(self):
+    def __init__(self, screen):
         plr_white = Player("A", "white")
         plr_black = Player("B", "black")
         self.lst_players = [plr_white, plr_black]
-        self.brd_board = Board()
+        # self.brd_board = Board()
+        self.brd_board = 1
         self.bln_end = False
         self.bln_whos_turn = True # Base on RBG: False (0) is black True (1) is white
         self.int_turn_counter = 1
+        self.screen = screen
+        self._images = []
     def play(self):
         while not self.bln_end:
 
@@ -51,7 +55,21 @@ class Game():
         self.int_turn_counter += 1
 
     def _draw_board(self):
-        self.brd_board.draw()
+        # self.brd_board.draw()
+        lst_colors = [p.Color("white"), p.Color("gray")]
+        int_dim = 8
+        int_space_size = self.screen.get_width()//int_dim
+        for r in range(int_dim):
+            for c in range(int_dim):
+                color = lst_colors[(r+c)%2]
+                p.draw.rect(self.screen, 
+                    color, 
+                    p.Rect(c*int_space_size,
+                        r*int_space_size,
+                        int_space_size,
+                        int_space_size,
+                        )
+                )
 
     def _update_player(self, plr_player: Player, int_cur_x, int_cur_y, int_nxt_x, int_nxt_y):
         
@@ -72,6 +90,12 @@ class Game():
             return 0, 0, 1, 1
         else: # black
             return 7, 7, 7, 6
+
+
+    def load_images(self):
+        
+        self._images = [1]
+
 
     
 
