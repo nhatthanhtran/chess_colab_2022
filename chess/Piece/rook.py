@@ -12,7 +12,7 @@ class Rook(Piece):
         super().__init__(str_color, int_cur_x_pos, int_cur_y_pos, False)
         self.bln_moved = False
 
-    def PossibleMoves(self):
+    def possible_moves(self):
         lst_pos_moves = []
         # East (+=) direction move
         i = self.int_cur_x_pos
