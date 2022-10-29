@@ -3,7 +3,6 @@
 Pawn Class
 """
 from chess.Piece.piece import Piece
-import numpy as np
 from chess.Piece.helper import in_bound
 
 
