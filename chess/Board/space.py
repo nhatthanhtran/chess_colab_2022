@@ -23,3 +23,6 @@ class Space:
             return self.pc_piece
         else:
             return None
+
+    def is_occupied(self):
+        return self.bln_occupied

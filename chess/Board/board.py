@@ -9,6 +9,7 @@ from chess.Piece.bishop import Bishop
 from chess.Piece.king import King
 from chess.Piece.knight import Knight
 from chess.Piece.pawn import Pawn
+from chess.Piece.piece import Piece
 from chess.Piece.queen import Queen
 from chess.Piece.rook import Rook
 from chess.Board.space import Space
@@ -39,23 +40,8 @@ class Board:
     # creates list of pieces to put on board at creation
     def _create_pieces(self):
         _piece_color = "white"
-        # krook = Rook(_piece_color, 0, 0)
-        # self._lst_of_pieces.append(krook)
-        # kknight = Knight(_piece_color, 1, 0)
-        # self._lst_of_pieces.append(kknight)
-        # kbishop = Bishop(_piece_color, 2, 0)
-        # self._lst_of_pieces.append(kbishop)
-        # king = King(_piece_color, 3, 0)
-        # self._lst_of_pieces.append(king)
-        # queen = Queen(_piece_color, 4, 0)
-        # self._lst_of_pieces.append(queen)
-        # qbishop = Bishop(_piece_color, 5, 0)
-        # self._lst_of_pieces.append(qbishop)
-        # qknight = Knight(_piece_color, 6, 0)
-        # self._lst_of_pieces.append(qknight)
-        # qrook = Rook(_piece_color, 7, 0)
-        # self._lst_of_pieces.append(qrook)
 
+        # Hardcode backline order for now
         _lst_backline = [
             Rook,
             Knight,
@@ -65,7 +51,7 @@ class Board:
             Bishop,
             Knight,
             Rook,
-        ]  # Hardcode backline order for now
+        ]
 
         # Set up back white row
         for i in range(len(_lst_backline)):
@@ -76,22 +62,6 @@ class Board:
             self._lst_of_pieces.append(Pawn(_piece_color, i, 1, 1))
 
         _piece_color = "black"
-        # krook = Rook(_piece_color, 0, 7)
-        # self._lst_of_pieces.append(krook)
-        # kknight = Knight(_piece_color, 1, 7)
-        # self._lst_of_pieces.append(kknight)
-        # kbishop = Bishop(_piece_color, 2, 7)
-        # self._lst_of_pieces.append(kbishop)
-        # king = King(_piece_color, 3, 7)
-        # self._lst_of_pieces.append(king)
-        # queen = Queen(_piece_color, 4, 7)
-        # self._lst_of_pieces.append(queen)
-        # qbishop = Bishop(_piece_color, 5, 7)
-        # self._lst_of_pieces.append(qbishop)
-        # qknight = Knight(_piece_color, 6, 7)
-        # self._lst_of_pieces.append(qknight)
-        # qrook = Rook(_piece_color, 7, 7)
-        # self._lst_of_pieces.append(qrook)
 
         # Set up black back row
         for i in range(len(_lst_backline)):
@@ -114,17 +84,59 @@ class Board:
 
     # returns true of piece at (s_x, s_y) can be moved to (d_x, d_y)
     def validate_move(self, s_x, s_y, d_x, d_y):
-        _piece = self._board[s_x][s_y].get_piece()
-        if _piece:
-            _possible_moves = _piece.possible_moves()
-            _piece_type = type(_piece).__name__
+        piece = self._board[s_x][s_y].get_piece()
+        valid_moves = []
+        if piece:
+            possible_moves = piece.possible_moves()  # by movement rules for piece
+            piece_type = type(piece).__name__  # determine which piece
 
-            if _piece_type == "Pawn":
-                print("pawn has moves", _possible_moves)
-            elif _piece_type == "Bishop":
-                print("bishop has moves", _possible_moves)
+            # case pawn
+            # if piece_type == "Pawn":
+            #     for i in range(len(possible_moves) - 1):
+            #         # check for blocking pieces
+            #         for j in range(len(possible_moves[i])):
+            #             x = possible_moves[i][j][0]
+            #             y = possible_moves[i][j][1]
+            #             if self._board[x][y].is_occupied():
+            #                 continue
+            #             else:
+            #                 valid_moves.append([x, y])
+
+            #     # check attack spaces
+            #     attack_Squares = possible_moves[-1]
+            #     for i in range(len(attack_Squares)):
+            #         x = attack_Squares[i][0]
+            #         y = attack_Squares[i][1]
+            #         if self._board[x][y].str_color == piece.str_color:
+            #             continue
+            #         else:
+            #             valid_moves.append([x, y])
+            #     print("pawn has valid moves", valid_moves)
+
+            # Note: The king can move themselves into check. Will change later.
+            if piece_type in ["Bishop", "King", "Knight", "Pawn", "Rook", "Queen"]:
+                for path in possible_moves:
+                    for space in path:
+                        x = space[0]
+                        y = space[1]
+                        # Blocked by piece of same color
+                        if (
+                            self._board[x][y].is_occupied()
+                            and self._board[x][y].str_color == piece.str_color
+                        ):
+                            break
+                        # Blocked by piece of opposite collor
+                        elif self._board[x][y].is_occupied():
+                            valid_moves.append([x, y])
+                            break
+                        # Space unoccupied
+                        else:
+                            valid_moves.append(space)
             else:
                 print("validate_move case match error")
+            return False
+        # Now check if the given destination space is in the valid moves
+        if [d_x, d_y] in valid_moves:
             return True
         else:
             return False
