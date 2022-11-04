@@ -147,12 +147,11 @@ class Board:
         dct_pieces = {"Pawn":0, "Knight":1, "Bishop":2, "Rook":3, "Queen":4, "King":5}
         lst_piece_coord = []
         for p in self._lst_of_pieces:
-            lst_type_pos = []
             x = p.int_cur_x_pos
             y = p.int_cur_y_pos
             color = p.str_color
             p_type = type(p).__name__
             offset = 0 if color == "black" else 6
-            lst_type_pos.append([dct_pieces[p_type] + offset, [x, y]])
+            lst_piece_coord.append([dct_pieces[p_type] + offset, [x, y]])
         
-        return lst_type_pos
+        return lst_piece_coord
