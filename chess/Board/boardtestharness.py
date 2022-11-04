@@ -17,4 +17,4 @@ from chess.Board.space import Space
 test1 = Board()
 
 print(test1.get_spaceColor(0, 0))
-print(test1.draw())
+print(test1.get_board_state())

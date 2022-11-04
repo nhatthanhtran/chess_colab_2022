@@ -67,7 +67,7 @@ class Board:
         for i in range(len(_lst_backline)):
             self._lst_of_pieces.append(_lst_backline[i](_piece_color, i, 7))
 
-        # Set up pawns
+        # Set up black pawns
         for i in range(_INT_BOARDSIZE):
             self._lst_of_pieces.append(Pawn(_piece_color, i, 6, -1))
 
@@ -91,30 +91,30 @@ class Board:
             piece_type = type(piece).__name__  # determine which piece
 
             # case pawn
-            # if piece_type == "Pawn":
-            #     for i in range(len(possible_moves) - 1):
-            #         # check for blocking pieces
-            #         for j in range(len(possible_moves[i])):
-            #             x = possible_moves[i][j][0]
-            #             y = possible_moves[i][j][1]
-            #             if self._board[x][y].is_occupied():
-            #                 continue
-            #             else:
-            #                 valid_moves.append([x, y])
+            if piece_type == "Pawn":
+                for i in range(len(possible_moves) - 1):
+                    # check for blocking pieces
+                    for j in range(len(possible_moves[i])):
+                        x = possible_moves[i][j][0]
+                        y = possible_moves[i][j][1]
+                        if self._board[x][y].is_occupied():
+                            continue
+                        else:
+                            valid_moves.append([x, y])
 
-            #     # check attack spaces
-            #     attack_Squares = possible_moves[-1]
-            #     for i in range(len(attack_Squares)):
-            #         x = attack_Squares[i][0]
-            #         y = attack_Squares[i][1]
-            #         if self._board[x][y].str_color == piece.str_color:
-            #             continue
-            #         else:
-            #             valid_moves.append([x, y])
-            #     print("pawn has valid moves", valid_moves)
+                # check attack spaces
+                attack_Squares = possible_moves[-1]
+                for i in range(len(attack_Squares)):
+                    x = attack_Squares[i][0]
+                    y = attack_Squares[i][1]
+                    if self._board[x][y].str_color == piece.str_color:
+                        continue
+                    else:
+                        valid_moves.append([x, y])
+                print("pawn has valid moves", valid_moves)
 
             # Note: The king can move themselves into check. Will change later.
-            if piece_type in ["Bishop", "King", "Knight", "Pawn", "Rook", "Queen"]:
+            elif piece_type in ["Bishop", "King", "Knight", "Rook", "Queen"]:
                 for path in possible_moves:
                     for space in path:
                         x = space[0]
@@ -125,7 +125,7 @@ class Board:
                             and self._board[x][y].str_color == piece.str_color
                         ):
                             break
-                        # Blocked by piece of opposite collor
+                        # End path by piece of opposite collor
                         elif self._board[x][y].is_occupied():
                             valid_moves.append([x, y])
                             break
@@ -141,8 +141,10 @@ class Board:
         else:
             return False
 
-    def draw(self):
-        dct_pieces = {"Pawn" : 0, "Knight": 1, "Bishop":2, "Rook":3, "Queen":4, "King":5}
+    # returns a list of lists representing the current state of board
+    # format: [piece and color, [x_pos, y_pos]]
+    def get_board_state(self):
+        dct_pieces = {"Pawn":0, "Knight":1, "Bishop":2, "Rook":3, "Queen":4, "King":5}
         lst_piece_coord = []
         for p in self._lst_of_pieces:
             lst_type_pos = []
@@ -151,4 +153,6 @@ class Board:
             color = p.str_color
             p_type = type(p).__name__
             offset = 0 if color == "black" else 6
-            lst_type_pos.append([dct_pieces[p_type], [x, y]])
+            lst_type_pos.append([dct_pieces[p_type] + offset, [x, y]])
+        
+        return lst_type_pos
