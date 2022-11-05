@@ -70,7 +70,26 @@ class Game():
                         int_space_size,
                         )
                 )
+    def _draw_pieces(self):
 
+        c = 1
+        r = 1
+        int_dim = 8
+        int_space_size = self.screen.get_width()//int_dim
+        self.screen.blit(p.image.load("img/bp.png"),
+                        p.Rect(c*int_space_size,
+                        r*int_space_size,
+                        int_space_size,
+                        int_space_size))
+
+        # pass
+        # for r in range(8):
+        #     for c in range(8):
+        #         self.screen.blit(p.image.load("img/bp.png"),
+        #                         p.Rect(c*int_space_size,
+        #                         r*int_space_size,
+        #                         int_space_size,
+        #                         int_space_size))
     def _update_player(self, plr_player: Player, int_cur_x, int_cur_y, int_nxt_x, int_nxt_y):
         
         plr_player.append_move(
@@ -91,6 +110,8 @@ class Game():
         else: # black
             return 7, 7, 7, 6
 
+    def move_piece(self, lst_moves):
+        pass
 
     def load_images(self):
         
