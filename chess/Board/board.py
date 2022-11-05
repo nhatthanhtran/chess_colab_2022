@@ -133,7 +133,7 @@ class Board:
                             valid_moves.append(space)
             else:
                 print("validate_move case match error")
-            return False
+                return False
         # Now check if the given destination space is in the valid moves
         if [d_x, d_y] in valid_moves:
             return True
@@ -142,8 +142,11 @@ class Board:
 
     # returns a list of lists representing the current state of board
     # format: [piece and color, [x_pos, y_pos]]
+    # piece color: "Pawn":0, "Knight":1, "Bishop":2, "Rook":3, "Queen":4, "King":5 if
+    # white add 6.
     def get_board_state(self):
-        dct_pieces = {"Pawn":0, "Knight":1, "Bishop":2, "Rook":3, "Queen":4, "King":5}
+        dct_pieces = {"Pawn": 0, "Knight": 1,
+                      "Bishop": 2, "Rook": 3, "Queen": 4, "King": 5}
         lst_piece_coord = []
         for p in self._lst_of_pieces:
             if not p.bln_captured:
@@ -153,7 +156,7 @@ class Board:
                 p_type = type(p).__name__
                 offset = 0 if color == "black" else 6
                 lst_piece_coord.append([dct_pieces[p_type] + offset, [x, y]])
-        
+
         return lst_piece_coord
 
     # pc_attacker captures the piece at x_pos, y_pos on the board, returns
@@ -162,17 +165,17 @@ class Board:
     def capture_piece(self, x_pos, y_pos, pc_attacker):
         piece = self._board[x_pos][y_pos].get_piece()
 
-        #check that there is a piece to capture
+        # check that there is a piece to capture
         if piece and not piece.bln_captured:
             # replace piece on space with capturing piece
             self._board[x_pos][y_pos].occupy(pc_attacker)
             # tell the captured piece that it is off the board.
             piece.int_cur_x_pos = _INT_BOARDSIZE
             piece.int_cur_y_pos = _INT_BOARDSIZE
-            
+
         return piece
 
-    # attempts to move piece at x_s, y_s to x_d, y_d. Returns false if no piece 
+    # attempts to move piece at x_s, y_s to x_d, y_d. Returns false if no piece
     #  at x_s, y_s or invalid move,
     # none if move successful and nothing to capture, or captured piece if move captures
     # piece at x_d, y_d
@@ -180,11 +183,13 @@ class Board:
         attacker = self._board[x_s][y_s].get_piece()
         captured = None
 
+        # check invalid starting space
         if not attacker:
             return False
-        
+
         valid = self.validate_move(x_s, y_s, x_d, y_d)
 
+        # check invalid end space
         if not valid:
             return False
 
@@ -193,8 +198,8 @@ class Board:
             captured = self.capture_piece(x_d, y_d, attacker)
         elif valid:
             self._board[x_d][y_d].occupy(attacker)
-        
-        # in all remaining cases, update attacker on new position and return captured
+
+        # update attacker on new position and return captured
         attacker.int_cur_x_pos = x_d
         attacker.int_cur_y_pos = y_d
         return captured
