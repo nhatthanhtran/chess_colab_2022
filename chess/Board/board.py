@@ -200,6 +200,5 @@ class Board:
             self._board[x_d][y_d].occupy(attacker)
 
         # update attacker on new position and return captured
-        attacker.int_cur_x_pos = x_d
-        attacker.int_cur_y_pos = y_d
+        attacker.move(x_d, y_d)
         return captured
