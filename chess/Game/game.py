@@ -2,7 +2,7 @@
 Game Class
 """
 
-# from chess.Board.board import Board
+from chess.Board.board import Board
 from chess.Player.player import Player
 import pygame as p
 
@@ -11,13 +11,13 @@ class Game():
         plr_white = Player("A", "white")
         plr_black = Player("B", "black")
         self.lst_players = [plr_white, plr_black]
-        # self.brd_board = Board()
-        self.brd_board = 1
+        self.brd_board = Board()
+        # self.brd_board = 1
         self.bln_end = False
         self.bln_whos_turn = True # Base on RBG: False (0) is black True (1) is white
         self.int_turn_counter = 1
         self.screen = screen
-        self._images = []
+        self._dct_images = self.load_images()
     def play(self):
         while not self.bln_end:
 
@@ -70,7 +70,36 @@ class Game():
                         int_space_size,
                         )
                 )
+    def _draw_pieces(self):
 
+        # c = 1
+        # r = 1
+        int_dim = 8
+        int_space_size = self.screen.get_width()//int_dim
+        # self.screen.blit(p.image.load("img/bp.png"),
+        #                 p.Rect(c*int_space_size,
+        #                 r*int_space_size,
+        #                 int_space_size,
+        #                 int_space_size))
+        
+        lst_pieces = self.brd_board.get_board_state()
+
+        for piece, loc in lst_pieces:
+            self.screen.blit(self._dct_images.get(piece),
+                            p.Rect(loc[0]*int_space_size,
+                            loc[1]*int_space_size,
+                            int_space_size,
+                            int_space_size))   
+
+
+        # pass
+        # for r in range(8):
+        #     for c in range(8):
+        #         self.screen.blit(p.image.load("img/bp.png"),
+        #                         p.Rect(c*int_space_size,
+        #                         r*int_space_size,
+        #                         int_space_size,
+        #                         int_space_size))
     def _update_player(self, plr_player: Player, int_cur_x, int_cur_y, int_nxt_x, int_nxt_y):
         
         plr_player.append_move(
@@ -91,11 +120,23 @@ class Game():
         else: # black
             return 7, 7, 7, 6
 
+    def move_piece(self, lst_moves):
+        tup_src = lst_moves[0]
+        tup_dest = lst_moves[1]
+        self.brd_board.move_piece(tup_src[0], tup_src[1],
+                                tup_dest[0], tup_dest[1])
+        
+        self._draw_board()
+        self._draw_pieces()
+            
 
     def load_images(self):
-        
-        self._images = [1]
-
+        lst_img_name = ["wp.png", "wN.png", "wB.png", "wR.png", "wQ.png", "wK.png",
+                        "bp.png", "bN.png", "bB.png", "bR.png", "bQ.png", "bK.png",]
+        dct_images = {}
+        for i in range(len(lst_img_name)):
+            dct_images[i] = p.image.load("img/" + lst_img_name[i])
+        return dct_images
 
     
 
