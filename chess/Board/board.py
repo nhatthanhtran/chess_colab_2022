@@ -67,7 +67,7 @@ class Board:
         for i in range(len(_lst_backline)):
             self._lst_of_pieces.append(_lst_backline[i](_piece_color, i, 7))
 
-        # Set up pawns
+        # Set up black pawns
         for i in range(_INT_BOARDSIZE):
             self._lst_of_pieces.append(Pawn(_piece_color, i, 6, -1))
 
@@ -91,30 +91,29 @@ class Board:
             piece_type = type(piece).__name__  # determine which piece
 
             # case pawn
-            # if piece_type == "Pawn":
-            #     for i in range(len(possible_moves) - 1):
-            #         # check for blocking pieces
-            #         for j in range(len(possible_moves[i])):
-            #             x = possible_moves[i][j][0]
-            #             y = possible_moves[i][j][1]
-            #             if self._board[x][y].is_occupied():
-            #                 continue
-            #             else:
-            #                 valid_moves.append([x, y])
+            if piece_type == "Pawn":
+                for i in range(len(possible_moves) - 1):
+                    # check for blocking pieces
+                    for j in range(len(possible_moves[i])):
+                        x = possible_moves[i][j][0]
+                        y = possible_moves[i][j][1]
+                        if self._board[x][y].is_occupied():
+                            continue
+                        else:
+                            valid_moves.append([x, y])
 
-            #     # check attack spaces
-            #     attack_Squares = possible_moves[-1]
-            #     for i in range(len(attack_Squares)):
-            #         x = attack_Squares[i][0]
-            #         y = attack_Squares[i][1]
-            #         if self._board[x][y].str_color == piece.str_color:
-            #             continue
-            #         else:
-            #             valid_moves.append([x, y])
-            #     print("pawn has valid moves", valid_moves)
+                # check attack spaces
+                attack_Squares = possible_moves[-1]
+                for i in range(len(attack_Squares)):
+                    x = attack_Squares[i][0]
+                    y = attack_Squares[i][1]
+                    if self._board[x][y].str_color == piece.str_color:
+                        continue
+                    else:
+                        valid_moves.append([x, y])
 
             # Note: The king can move themselves into check. Will change later.
-            if piece_type in ["Bishop", "King", "Knight", "Pawn", "Rook", "Queen"]:
+            elif piece_type in ["Bishop", "King", "Knight", "Rook", "Queen"]:
                 for path in possible_moves:
                     for space in path:
                         x = space[0]
@@ -125,7 +124,7 @@ class Board:
                             and self._board[x][y].str_color == piece.str_color
                         ):
                             break
-                        # Blocked by piece of opposite collor
+                        # End path by piece of opposite collor
                         elif self._board[x][y].is_occupied():
                             valid_moves.append([x, y])
                             break
@@ -140,3 +139,62 @@ class Board:
             return True
         else:
             return False
+
+    # returns a list of lists representing the current state of board
+    # format: [piece and color, [x_pos, y_pos]]
+    def get_board_state(self):
+        dct_pieces = {"Pawn":0, "Knight":1, "Bishop":2, "Rook":3, "Queen":4, "King":5}
+        lst_piece_coord = []
+        for p in self._lst_of_pieces:
+            if not p.bln_captured:
+                x = p.int_cur_x_pos
+                y = p.int_cur_y_pos
+                color = p.str_color
+                p_type = type(p).__name__
+                offset = 0 if color == "black" else 6
+                lst_piece_coord.append([dct_pieces[p_type] + offset, [x, y]])
+        
+        return lst_piece_coord
+
+    # pc_attacker captures the piece at x_pos, y_pos on the board, returns
+    # the captured piece that was at x_pos, y_pos, now with captured flag
+    # and cur_x_pos, cur_y_pos set to _INT_BOARDSIZE to represent being off the board.
+    def capture_piece(self, x_pos, y_pos, pc_attacker):
+        piece = self._board[x_pos][y_pos].get_piece()
+
+        #check that there is a piece to capture
+        if piece and not piece.bln_captured:
+            # replace piece on space with capturing piece
+            self._board[x_pos][y_pos].occupy(pc_attacker)
+            # tell the captured piece that it is off the board.
+            piece.int_cur_x_pos = _INT_BOARDSIZE
+            piece.int_cur_y_pos = _INT_BOARDSIZE
+            
+        return piece
+
+    # attempts to move piece at x_s, y_s to x_d, y_d. Returns false if no piece 
+    #  at x_s, y_s or invalid move,
+    # none if move successful and nothing to capture, or captured piece if move captures
+    # piece at x_d, y_d
+    def move_piece(self, x_s, y_s, x_d, y_d):
+        attacker = self._board[x_s][y_s].get_piece()
+        captured = None
+
+        if not attacker:
+            return False
+        
+        valid = self.validate_move(x_s, y_s, x_d, y_d)
+
+        if not valid:
+            return False
+
+        elif valid and self._board[x_d][y_d].is_occupied():
+            # There is a piece to capture
+            captured = self.capture_piece(x_d, y_d, attacker)
+        elif valid:
+            self._board[x_d][y_d].occupy(attacker)
+        
+        # in all remaining cases, update attacker on new position and return captured
+        attacker.int_cur_x_pos = x_d
+        attacker.int_cur_y_pos = y_d
+        return captured
