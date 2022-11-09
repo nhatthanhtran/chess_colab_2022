@@ -25,7 +25,7 @@ def main():
     game._draw_board()
     game._draw_pieces()
     running  = True
-    tup_sq_selected = ()
+    lst_sq_selected = []
     lst_player_clicks = []
     while running:
         for e in p.event.get():
@@ -35,15 +35,19 @@ def main():
                 tup_location = p.mouse.get_pos() # (x,y) location of mouse
                 int_x_select = tup_location[0]//SQ_SIZE
                 int_y_select = tup_location[1]//SQ_SIZE
-                tup_sq_selected = (int_x_select, int_y_select)
-                if tup_sq_selected in lst_player_clicks:
+                lst_sq_selected = (int_x_select, int_y_select)
+                if lst_sq_selected in lst_player_clicks:
                     lst_player_clicks = []
                 else:
-                    lst_player_clicks.append(tup_sq_selected)
+                    lst_player_clicks.append(lst_sq_selected)
 
                 if len(lst_player_clicks) == 2:
                     game.move_piece(lst_player_clicks)
                     lst_player_clicks = []
+                if len(lst_player_clicks) == 1:
+                    a = 1
+                    # This will be use for suggestion move
+                    game.draw_suggest_move(lst_player_clicks)
         clock.tick(15)
         p.display.flip()
 

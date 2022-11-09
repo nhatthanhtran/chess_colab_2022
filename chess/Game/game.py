@@ -54,14 +54,21 @@ class Game():
         self.bln_whos_turn = not self.bln_whos_turn
         self.int_turn_counter += 1
 
-    def _draw_board(self):
+    def _draw_board(self, lst_suggest = None):
         # self.brd_board.draw()
-        lst_colors = [p.Color("white"), p.Color("gray")]
+        # white, gray are default, blue are reserve for suggestion
+        lst_colors = [p.Color("white"), p.Color("gray"), p.Color("green")]
+        if not lst_suggest:
+            lst_suggest = []
+        color = lst_colors[0]
         int_dim = 8
         int_space_size = self.screen.get_width()//int_dim
         for r in range(int_dim):
             for c in range(int_dim):
-                color = lst_colors[(r+c)%2]
+                if (c, r) in lst_suggest:
+                    color = lst_colors[2]
+                else:
+                    color = lst_colors[(r+c)%2]
                 p.draw.rect(self.screen, 
                     color, 
                     p.Rect(c*int_space_size,
@@ -121,14 +128,17 @@ class Game():
             return 7, 7, 7, 6
 
     def move_piece(self, lst_moves):
-        tup_src = lst_moves[0]
-        tup_dest = lst_moves[1]
-        self.brd_board.move_piece(tup_src[0], tup_src[1],
-                                tup_dest[0], tup_dest[1])
+        lst_src = lst_moves[0]
+        lst_dest = lst_moves[1]
+        self.brd_board.move_piece(lst_src[0], lst_src[1],
+                                lst_dest[0], lst_dest[1])
         
         self._draw_board()
         self._draw_pieces()
             
+    def draw_suggest_move(self, lst_suggest):
+        self._draw_board(lst_suggest=lst_suggest)
+        self._draw_pieces()
 
     def load_images(self):
         lst_img_name = ["wp.png", "wN.png", "wB.png", "wR.png", "wQ.png", "wK.png",

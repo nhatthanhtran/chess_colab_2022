@@ -19,10 +19,10 @@ class Pawn(Piece):
         if self.bln_moved:
             if in_bound(self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir):
                 lst_pos_moves.append(
-                    [self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir]
+                    [[self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir]]
                 )
             else:
-                lst_pos_moves.append([])
+                lst_pos_moves.append([[]])
 
         else:
             if in_bound(self.int_cur_x_pos, self.int_cur_y_pos + self.int_move_dir):
