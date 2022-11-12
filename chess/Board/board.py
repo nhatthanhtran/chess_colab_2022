@@ -89,11 +89,11 @@ class Board:
 
             # case pawn
             if piece_type == "Pawn":
-                for i in range(len(possible_moves) - 1):
+                for path in possible_moves[:-1]:
                     # check for blocking pieces
-                    for j in range(len(possible_moves[i])):
-                        x = possible_moves[i][j][0]
-                        y = possible_moves[i][j][1]
+                    for space in path:
+                        x = space[0]
+                        y = space[1]
                         if self._board[x][y].is_occupied():
                             continue
                         else:
@@ -117,7 +117,7 @@ class Board:
                         continue
 
             # Note: The king can move themselves into check. Will change later.
-            elif piece_type in ["Bishop", "King", "Knight", "Rook", "Queen"]:
+            elif piece_type in ["Bishop", "Knight", "Rook", "Queen"]:
                 for path in possible_moves:
                     for space in path:
                         x = space[0]
@@ -135,6 +135,25 @@ class Board:
                         # Space unoccupied
                         else:
                             valid_moves.append(space)
+            elif piece_type == "King":
+                for path in possible_moves[:-1]:
+                    for space in path:
+                        x = space[0]
+                        y = space[1]
+                        # Blocked by piece of same color
+                        if (
+                            self._board[x][y].is_occupied()
+                            and self._board[x][y].get_piece().str_color == piece.str_color
+                        ):
+                            break
+                        # End path by piece of opposite collor
+                        elif self._board[x][y].is_occupied():
+                            valid_moves.append([x, y])
+                            break
+                        # Space unoccupied
+                        else:
+                            valid_moves.append(space)
+                # Check castling spaces for potential castling request
             else:
                 print("validate_move case match error")
                 return False
