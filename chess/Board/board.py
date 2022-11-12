@@ -104,10 +104,17 @@ class Board:
                 for i in range(len(attack_Squares)):
                     x = attack_Squares[i][0]
                     y = attack_Squares[i][1]
-                    if self._board[x][y].str_color == piece.str_color:
-                        continue
+                    bln_occupied = self._board[x][y].is_occupied()
+                    # check if target space is occupied
+                    if bln_occupied:
+                        str_tar = self._board[x][y].get_piece().str_color
+                        if str_tar == piece.str_color:
+                            # space is occupied by same color piece, skip
+                            continue
+                        else:
+                            valid_moves.append([x, y])
                     else:
-                        valid_moves.append([x, y])
+                        continue
 
             # Note: The king can move themselves into check. Will change later.
             elif piece_type in ["Bishop", "King", "Knight", "Rook", "Queen"]:
@@ -118,7 +125,7 @@ class Board:
                         # Blocked by piece of same color
                         if (
                             self._board[x][y].is_occupied()
-                            and self._board[x][y].str_color == piece.str_color
+                            and self._board[x][y].get_piece().str_color == piece.str_color
                         ):
                             break
                         # End path by piece of opposite collor
@@ -198,4 +205,5 @@ class Board:
 
         # update attacker on new position and return captured
         attacker.move(x_d, y_d)
+        self._board[x_s][y_s].vacate()
         return captured

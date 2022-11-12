@@ -18,6 +18,13 @@ class Space:
             self.bln_occupied = True
             self.pc_piece = piece
 
+    def vacate(self):
+        if self.bln_occupied:
+            self.bln_occupied = False
+            self.pc_piece = None
+        else:
+            pass
+
     def get_piece(self):
         if self.bln_occupied:
             return self.pc_piece
