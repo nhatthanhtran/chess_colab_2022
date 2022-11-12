@@ -49,6 +49,16 @@ class King(Piece):
             lst_pos_moves, self.int_cur_x_pos + 1, self.int_cur_y_pos - 1
         )
 
+        # return King castle moves
+        # This will be a list of pair of move for the king
+        # the first element will be the rook position
+        # the second is the king position
+        if not self.bln_moved:
+            lst_pos_moves.append(self.get_castle_moves())
+            print("Testing")
+        else:
+            lst_pos_moves.append([])
+
         return lst_pos_moves
 
     def add_move(self, lst_pos_move, int_x_pos, int_y_pos):
@@ -58,6 +68,23 @@ class King(Piece):
             lst_pos_move.append(lst_move)
 
         return lst_pos_move
+
+    def get_castle_moves(self):
+        # E ++=
+        print("Testing2")
+        lst_castle_moves = []
+        if in_bound(self.int_cur_x_pos+2, self.int_cur_y_pos):
+            lst_castle_moves.append([self.int_cur_x_pos+1, self.int_cur_y_pos])
+            lst_castle_moves.append([self.int_cur_x_pos+2, self.int_cur_y_pos])
+            print("E move")
+        
+        # W --=
+        if in_bound(self.int_cur_x_pos-2, self.int_cur_y_pos):
+            lst_castle_moves.append([self.int_cur_x_pos-1, self.int_cur_y_pos])
+            lst_castle_moves.append([self.int_cur_x_pos-2, self.int_cur_y_pos])
+            print("W moves")
+        print(lst_castle_moves)
+        return lst_castle_moves
 
     def capture(self):
         self.bln_captured = True
