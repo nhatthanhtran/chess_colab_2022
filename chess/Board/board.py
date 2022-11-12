@@ -1,9 +1,6 @@
 """Board class
 """
 
-from ctypes import sizeof
-from nis import match
-from operator import truediv
 from unittest import case
 from chess.Piece.bishop import Bishop
 from chess.Piece.king import King
