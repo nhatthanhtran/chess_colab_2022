@@ -35,7 +35,7 @@ def main():
                 tup_location = p.mouse.get_pos() # (x,y) location of mouse
                 int_x_select = tup_location[0]//SQ_SIZE
                 int_y_select = tup_location[1]//SQ_SIZE
-                lst_sq_selected = (int_x_select, int_y_select)
+                lst_sq_selected = [int_x_select, int_y_select]
                 if lst_sq_selected in lst_player_clicks:
                     lst_player_clicks = []
                 else:

@@ -65,7 +65,7 @@ class Game():
         int_space_size = self.screen.get_width()//int_dim
         for r in range(int_dim):
             for c in range(int_dim):
-                if (c, r) in lst_suggest:
+                if [c, r] in lst_suggest:
                     color = lst_colors[2]
                 else:
                     color = lst_colors[(r+c)%2]
@@ -137,8 +137,11 @@ class Game():
         self._draw_pieces()
             
     def draw_suggest_move(self, lst_suggest):
-        self._draw_board(lst_suggest=lst_suggest)
-        self._draw_pieces()
+        if len(lst_suggest) == 1:
+            _, lst_valid_moves = self.brd_board.get_valid_moves(lst_suggest[0][0],lst_suggest[0][1])
+            lst_valid_moves.append(lst_suggest[0])
+            self._draw_board(lst_suggest=lst_valid_moves)
+            self._draw_pieces()
 
     def load_images(self):
         lst_img_name = ["wp.png", "wN.png", "wB.png", "wR.png", "wQ.png", "wK.png",
