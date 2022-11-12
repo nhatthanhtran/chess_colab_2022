@@ -55,7 +55,7 @@ class King(Piece):
         # the second is the king position
         if not self.bln_moved:
             lst_pos_moves.append(self.get_castle_moves())
-            print("Testing")
+
         else:
             lst_pos_moves.append([])
 
@@ -71,19 +71,16 @@ class King(Piece):
 
     def get_castle_moves(self):
         # E ++=
-        print("Testing2")
         lst_castle_moves = []
         if in_bound(self.int_cur_x_pos+2, self.int_cur_y_pos):
             lst_castle_moves.append([self.int_cur_x_pos+1, self.int_cur_y_pos])
             lst_castle_moves.append([self.int_cur_x_pos+2, self.int_cur_y_pos])
-            print("E move")
-        
+    
         # W --=
         if in_bound(self.int_cur_x_pos-2, self.int_cur_y_pos):
             lst_castle_moves.append([self.int_cur_x_pos-1, self.int_cur_y_pos])
             lst_castle_moves.append([self.int_cur_x_pos-2, self.int_cur_y_pos])
-            print("W moves")
-        print(lst_castle_moves)
+
         return lst_castle_moves
 
     def capture(self):
