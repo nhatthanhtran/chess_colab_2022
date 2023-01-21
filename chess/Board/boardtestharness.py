@@ -14,7 +14,7 @@ from chess.Board.space import Space
 # testing creation of a new board with pieces
 test1 = Board()
 
-print(test1.get_spaceColor(0, 0))
+print(test1.get_space_color(0, 0))
 print(test1.get_board_state())
 test1.move_piece(1, 6, 1, 4)
 test1.move_piece(1, 4, 1, 3)
